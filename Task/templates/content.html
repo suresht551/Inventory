@@ -1,0 +1,51 @@
+								{% load static %}
+								<section id="banner">
+									<div class="content">
+										<h3 align="center">Inventory Details</h3>
+										<table align="center">
+											<tr>
+												<th>Image</th>
+												<th>Item Name</th>
+												<th>Item ID</th>
+												<th>Description</th>
+												<th>Vendor Name</th>
+												<th>Update</th>
+												<th>Delete</th>
+											</tr>
+											{% for inv in data_t %}
+												<tr>
+													{% static "" as baseUrl %}
+													<td><img src="{{baseUrl}}images/{{inv.photo}}" height="40" width="50"></td>
+													<td>{{inv.item_name}}</td>
+													<td>{{inv.item_id}}</td>
+													<td>{{inv.description}}</td>
+													<td>{{inv.vendor_name}}</td>
+													<td><button><a href="/update/{{inv.item_id}}">Update</a></button></td>
+													<td><button><a href="/delete/{{inv.item_id}}">Delete</a></button></td>	
+												</tr>
+											{% endfor %}
+										</table>
+										<h3 align="center">Deleted Records</h3>
+										<table align="center">
+											<tr>
+												<th>Image</th>
+												<th>Item Name</th>
+												<th>Item ID</th>
+												<th>Description</th>
+												<th>Vendor Name</th>
+												<th colspan="2">Undo</th>
+											</tr>
+											{% for inv in data_f %}
+												<tr>
+													{% static "" as baseUrl %}
+													<td><img src="{{baseUrl}}images/{{inv.photo}}" height="40" width="50"></td>
+													<td>{{inv.item_name}}</td>
+													<td>{{inv.item_id}}</td>
+													<td>{{inv.description}}</td>
+													<td>{{inv.vendor_name}}</td>
+													<td><button><a href="/update/{{inv.item_id}}">Undo</a></button></td>	
+												</tr>
+											{% endfor %}
+										</table>
+										
+								</section>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+{% load static %}
+
+{% include 'head.html' %}
+
+<html>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							{% include 'header.html' %}
+							<!-- Banner -->
+								{% load static %}
+								<section id="banner">
+									<div class="content">
+										<h3 align="center">Inventory Records</h3>
+										<table align="center">
+										
+											<tr>
+												<th>Image</th>
+												<th>Item Name</th>
+												<th>Item ID</th>
+												<th>Decription</th>
+												<th>Vendor Name</th>
+												<th>Action</th>
+											</tr>
+											{% for inv in data %}
+												<form action="/update_data/" method="POST" enctype="multipart/form-data">
+												{% csrf_token %}
+												<input type="hidden" value="{{inv.number}}" name="inv_id">
+												<tr>
+													{% static "" as baseUrl %}
+													<td>
+														<img src="{{baseUrl}}images/{{inv.photo}}" height="40" width="50">
+													</td>
+													<td><input type="text" name="item_name" value="{{inv.item_name}}"></td>
+													<td><input type="text" name="item_id" value="{{inv.item_id}}"></td>
+													<td><input type="text" name="description" value="{{inv.description}}"></td>
+													<td><input type="text" name="vendor_name" value="{{inv.vendor_name}}"></td>
+													<td><input type="submit" value="Undo"></td>
+												</tr>
+												</form>
+											{% endfor %}
+										</table>
+										
+								</section>
+						</div>
+					</div>
+				<!-- Sidebar -->
+					{% include 'sidebar.html' %}
+			</div>
+		<!-- Scripts -->
+			{% include 'js_scripts.html' %}
+	</body>
+</html>
